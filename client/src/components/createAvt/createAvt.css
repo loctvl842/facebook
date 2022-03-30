@@ -1,0 +1,184 @@
+.createAvtContainer {
+    width: 100vw;
+    height: 110vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.createAvtCard {
+    background: #fff;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 18px -11px #000000;
+    box-shadow: 0px 0px 18px -11px #000000;
+    width: 600px;
+}
+
+.createAvtBtnContainer {
+    border-top: 1px solid #ccc;
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.createAvtBtn {
+    background: #1877f2;
+    margin: 5px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    color: #fff;
+    opacity: 0.9;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.createAvtBtn:hover {
+    opacity: 1;
+}
+
+.createAvtSave {
+    width: 80px;
+}
+
+.createAvtCancel {
+    background-color: transparent;
+    color: #1877f2;
+}
+
+.createAvtCancel:hover {
+    background-color: #efefef;
+}
+
+.createAvtHeader {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 60px;
+    justify-content: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.createAvtTitle {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.createAvtCloseBtn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    background: #eee;
+    opacity: 0.7;
+}
+
+.createAvtCloseBtn:hover {
+    opacity: 1;
+}
+
+.reactEasyCrop_Container {
+    width: 250px;
+}
+
+.editAvtContainer {
+    position: relative;
+    width: 100%;
+    width: 250px;
+    min-height: 250px;
+    margin: 20px auto;
+}
+
+.createAvtChoosePhotoContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    margin-top: 20px;
+}
+
+.createAvtChoosePhoto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+    background-color: #e7f3ff;
+    height: 30px;
+    width: 250px;
+    border-radius: 10px;
+    color: #1877f2;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.createAvtChoosePhoto:hover {
+    opacity: 1;
+}
+
+.createAvtChoosePhotoText {
+    margin-left: 10px;
+}
+
+.createAvtZoomContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.createAvtZoomWrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0 80px;
+}
+
+.createAvtZoomSlider {
+    width: calc(100% - 80px);
+    height: 3px;
+    margin: 0 10px;
+    outline: none;
+}
+
+.createAvtZoomAdjustBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+.createAvtZoomAdjustBtn:hover {
+    background: #eee;
+}
+
+.adjustBtnDisable {
+    color: #888;
+    background-color: #fff;
+    cursor: not-allowed;
+}
+
+.adjustBtnDisable:hover {
+    background-color: #fff;
+}

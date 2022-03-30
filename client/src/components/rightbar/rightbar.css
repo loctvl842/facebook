@@ -1,0 +1,48 @@
+.rightbar {
+    flex: 3.5;
+    height: calc(100vh - 50px);
+    overflow-y: scroll;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 50px;
+    margin: 0 5px;
+    margin-right: 0;
+    max-width: 350px;
+    margin-right: 10px;
+}
+
+.homeRightbarContainer {
+    margin-top: 20px;
+    padding: 0 20px;
+    border-radius: 10px;
+}
+
+.rightbar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.rightbar::-webkit-scrollbar-track {
+    display: none;
+}
+
+.rightbar::-webkit-scrollbar-thumb {
+    width: 5px;
+    border-radius: 50px;
+    background-color: #efefef;
+    transition: background-color 0.9s ease-out;
+}
+
+.rightbar:hover::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+}
+
+.rightbarTitle {
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.rightbarFriendList {
+    padding: 0;
+    list-style-type: none;
+    margin: 0;
+}

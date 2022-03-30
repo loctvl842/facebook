@@ -1,0 +1,32 @@
+html {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    display: block;
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background: #ccc;
+}
+
+::-webkit-scrollbar-hover {
+    opacity: 0.8;
+    background: black;
+}
+
+.homeContainer {
+    display: flex;
+    width: 100%;
+    background-color: rgba(240, 242, 245, 1);
+    justify-content: space-between;
+}

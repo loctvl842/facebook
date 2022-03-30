@@ -1,0 +1,239 @@
+.profileContainer {
+    width: 99vw;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.profile {
+    display: flex;
+    width: 100%;
+    background-color: #efefef;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profileTop {
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.profileTopContainer {
+    width: 100%;
+    max-width: 1000px;
+    position: relative;
+}
+
+.profileCoverImgContainer {
+    /* width:height = 27:10 */
+    width: 100%;
+    padding-top: 37.037037%;
+    border-radius: 0 0 10px 10px;
+    position: relative;
+    z-index: 100;
+}
+
+.profileCoverImgWrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.profileCoverImgLoadingContainer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileCoverImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0 0 10px 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.profileInfoContainer {
+    height: 100px;
+}
+
+.profileInfoWrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+}
+
+.profileInfoLeft {
+    flex: 3;
+    width: 0;
+    height: 0;
+}
+
+.profileUserImg {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #fafafa;
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+}
+
+.profileChooseAvt {
+    background-color: #cfcfcf;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.profileChooseAvt:hover {
+    opacity: 1;
+}
+
+.profileInfoRight {
+    flex: 6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding-left: 10px;
+}
+
+.profileFriendCounter {
+    color: #888;
+    font-weight: 600;
+}
+
+/* BOTTOM */
+
+.profileBottom {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.profileBottomContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 50px;
+}
+
+.profileRightBarContainer {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.rightbarInfoItem {
+    display: flex;
+    align-items: center;
+}
+
+.rightbarInfoIcon {
+    color: #888;
+    margin-right: 5px;
+    display: flex;
+    align-self: flex-start;
+}
+
+.rightbarInfoKey {
+    font-weight: 500;
+}
+
+.rightbarInfoValue {
+    font-weight: 700;
+}
+
+.rightbarInfoItem + .rightbarInfoItem {
+    margin-top: 8px;
+}
+
+.rightbarFollowing {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    align-items: center;
+}
+
+.rightbarFollowingContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    grid-gap: 10px;
+}
+
+.rightbarFollowingImg {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.rightbarFollowingName {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.rightbarDesc {
+    color: #555;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.rightbarProfileHr {
+    margin: 5px 0;
+    margin-bottom: 10px;
+}
+
+.profileInfoUserImgContainer {
+    z-index: 100;
+    position: absolute;
+    width: 100%;
+    height: 0;
+    bottom: 0;
+    display: flex;
+}
+
+.profileInfoUserImgLeft {
+    flex: 3;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.profileInfoUserImgRight {
+    flex: 6;
+    width: 0;
+    height: 0;
+}

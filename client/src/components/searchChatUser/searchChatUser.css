@@ -1,0 +1,40 @@
+.searchChatUser {
+  width: 100%;
+  height: 70px;
+}
+
+.searchChatUserImgContainer {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}
+
+.searchChatUserWrapper {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.searchChatUserWrapper:hover {
+  background-color: rgba(235, 235, 235, 0.7);
+}
+
+.searchChatUserImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.searchChatUserText {
+  height: 56px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 500;
+}

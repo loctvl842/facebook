@@ -1,0 +1,137 @@
+.coverPhotoContainer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+.coverPhotoBtnContainer {
+    width: 100%;
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0),
+        rgba(0, 0, 0, 0.5)
+    );
+    height: 80px;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-radius: 10px;
+}
+
+.coverPhotoBtnWrapper {
+    user-select: none;
+    transform: translateX(-20px);
+}
+
+.coverPhotoBtn {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin: 16px 20px;
+    cursor: pointer;
+}
+
+.coverPhotoBtn:hover {
+    background-color: #eee;
+}
+
+.coverPhotoBtnText {
+    margin-left: 10px;
+}
+
+.coverPhotoCropperContainer {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.coverPhotoMedia {
+    width: 100%;
+}
+
+.editCoverPhotoBtnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 60px;
+    width: 100%;
+}
+
+.editCoverPhotoBtnText {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+    color: #fff;
+}
+
+.editCoverPhotoBtnText > span {
+    margin-left: 10px;
+}
+
+.editCoverPhotoWrapper {
+    position: absolute;
+}
+
+.editCoverPhotoBtnWrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.editCoverPhotoBtn {
+    height: 65%;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    margin-right: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.9;
+    font-weight: 600;
+    font-size: 15px;
+    user-select: none;
+    color: #fff;
+}
+
+.editCoverPhotoBtn:hover {
+    opacity: 1;
+}
+
+.editCoverPhotoBtn:active {
+    transform: scale(0.9);
+}
+
+.editCoverPhotoBtnCancel {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.editCoverPhotoBtnSave {
+    background-color: #1877f2;
+}
+
+.chooseCoverPhotoAlternative {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}

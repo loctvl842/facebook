@@ -1,0 +1,13 @@
+.topbarRight {
+    flex: 3.5;
+    max-width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    justify-content: flex-end;
+}
+
+.topbarOptionContainer {
+    position: relative;
+    border-radius: 50%;
+}
