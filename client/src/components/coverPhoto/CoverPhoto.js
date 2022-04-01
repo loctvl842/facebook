@@ -1,21 +1,24 @@
-import axios from 'axios'
+import axios from 'axios';
 // cropper
-import getCroppedImage from '../../utils/cropImage'
-import { dataURLtoFile } from '../../utils/dataURLtoFile'
+import getCroppedImage from '../../utils/cropImage';
+import { dataURLtoFile } from '../../utils/dataURLtoFile';
 
-import './coverPhoto.css'
-import Cropper from 'react-easy-crop'
-import { useState, useRef, useContext } from 'react'
-import { useClickOutside } from '../../customHook/useClickOutside'
+import './coverPhoto.css';
+import Cropper from 'react-easy-crop';
+import { useState, useRef, useContext } from 'react';
+import { useClickOutside } from '../../customHook/useClickOutside';
 
 // context
-import { Store } from '../../store/store'
-import { UpdateUserStart, ChangeCoverPhotoSuccess } from '../../store/actions'
+import { AuthStore } from '../../context/AuthContext/store';
+import {
+  UpdateUserStart,
+  ChangeCoverPhotoSuccess,
+} from '../../context/AuthContext/actions';
 
 // icon
-import { CameraAltIcon, PublicIcon } from '../../icon'
+import { CameraAltIcon, PublicIcon } from '../../icon';
 
-import CoverPhotoOptions from '../coverPhotoOptions/CoverPhotoOptions'
+import CoverPhotoOptions from '../coverPhotoOptions/CoverPhotoOptions';
 
 function CoverPhoto({
   coverPhoto: imageUrl,
@@ -25,12 +28,12 @@ function CoverPhoto({
   const {
     auth: { user },
     dispatch,
-  } = useContext(Store)
+  } = useContext(AuthStore);
 
   // useState
-  const [imageFile, setImageFile] = useState(null) // file to upload to s3
-  const [crop, setCrop] = useState({ x: 0, y: 0 })
-  const [croppedArea, setCroppedArea] = useState(null)
+  const [imageFile, setImageFile] = useState(null); // file to upload to s3
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [croppedArea, setCroppedArea] = useState(null);
 
   // to check click outside the option button of post
   const {
@@ -38,78 +41,78 @@ function CoverPhoto({
     setVisible: setCoverPhotoOptionVisible,
     ref: coverPhotoOptionRef,
     btnRef: coverPhotoOptionBtnRef,
-  } = useClickOutside(false)
+  } = useClickOutside(false);
 
   // useRef
-  const fileReader = useRef()
+  const fileReader = useRef();
 
   const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
-    console.log({ croppedAreaPixels })
-    setCroppedArea(croppedAreaPixels)
-  }
+    console.log({ croppedAreaPixels });
+    setCroppedArea(croppedAreaPixels);
+  };
 
   const onFileChange = (e) => {
-    const fileInput = e.target.files[0]
-    if (fileReader.current) fileReader.current.abort()
+    const fileInput = e.target.files[0];
+    if (fileReader.current) fileReader.current.abort();
     if (fileInput) {
-      fileReader.current = new FileReader()
+      fileReader.current = new FileReader();
       fileReader.current.onload = () => {
         if (fileReader.current.readyState == 2) {
-          setImageUrl(fileReader.current.result)
+          setImageUrl(fileReader.current.result);
         }
-      }
-      fileReader.current.readAsDataURL(fileInput)
-      setImageFile(fileInput)
-      e.target.value = null
+      };
+      fileReader.current.readAsDataURL(fileInput);
+      setImageFile(fileInput);
+      e.target.value = null;
     }
-  }
+  };
 
   const onCropChange = (crop) => {
-    setCrop(crop)
-  }
+    setCrop(crop);
+  };
 
   const handleCancelClick = () => {
-    console.log({ user })
-    setImageUrl(user.coverPicture)
-    setImageFile(null)
-  }
+    console.log({ user });
+    setImageUrl(user.coverPicture);
+    setImageFile(null);
+  };
 
   const handleSaveClick = async () => {
     try {
-      dispatch(UpdateUserStart())
-      const canvas = await getCroppedImage(imageUrl, croppedArea)
-      const canvasDataUrl = canvas.toDataURL('image/jpeg')
+      dispatch(UpdateUserStart());
+      const canvas = await getCroppedImage(imageUrl, croppedArea);
+      const canvasDataUrl = canvas.toDataURL('image/jpeg');
       const convertDataUrlToFile = dataURLtoFile(
         canvasDataUrl,
-        'image-cropped.jpeg'
-      )
-      const formData = new FormData()
-      formData.append('tvl-cover-img', convertDataUrlToFile)
+        'image-cropped.jpeg',
+      );
+      const formData = new FormData();
+      formData.append('tvl-cover-img', convertDataUrlToFile);
       // upload to s3
-      const res = await axios.post('/upload/cover-img', formData)
+      const res = await axios.post('/upload/cover-img', formData);
       // update link to coverPhoto in database
       await axios.put(`/users/${user._id}`, {
         userId: user._id,
         coverPicture: res.data,
-      })
-      setImageFile(null)
-      dispatch(ChangeCoverPhotoSuccess(res.data))
+      });
+      setImageFile(null);
+      dispatch(ChangeCoverPhotoSuccess(res.data));
     } catch (err) {
-      console.log(err.response.data)
+      console.log(err.response.data);
     }
-  }
+  };
 
   return (
     <>
-      <div className='coverPhotoContainer'>
-        <div className='coverPhotoBtnContainer'>
+      <div className="coverPhotoContainer">
+        <div className="coverPhotoBtnContainer">
           {editableInfo && (
             <>
               {imageUrl ? (
-                <div className='coverPhotoBtnWrapper'>
-                  <div className='coverPhotoBtn' ref={coverPhotoOptionBtnRef}>
-                    <CameraAltIcon fontSize='small' />
-                    <span className='coverPhotoBtnText'>Edit cover photo</span>
+                <div className="coverPhotoBtnWrapper">
+                  <div className="coverPhotoBtn" ref={coverPhotoOptionBtnRef}>
+                    <CameraAltIcon fontSize="small" />
+                    <span className="coverPhotoBtnText">Edit cover photo</span>
                   </div>
                   {coverPhotoOptionVisible && (
                     <CoverPhotoOptions
@@ -121,10 +124,10 @@ function CoverPhoto({
                   )}
                 </div>
               ) : (
-                <div className='coverPhotoBtnWrapper'>
-                  <label className='coverPhotoBtn' htmlFor='coverPhoto'>
-                    <CameraAltIcon fontSize='small' />
-                    <span className='coverPhotoBtnText'>Add Cover Photo</span>
+                <div className="coverPhotoBtnWrapper">
+                  <label className="coverPhotoBtn" htmlFor="coverPhoto">
+                    <CameraAltIcon fontSize="small" />
+                    <span className="coverPhotoBtnText">Add Cover Photo</span>
                   </label>
                 </div>
               )}
@@ -132,14 +135,14 @@ function CoverPhoto({
           )}
         </div>
         <input
-          id='coverPhoto'
-          type='file'
-          accept='.jpeg,.jpg,.png'
+          id="coverPhoto"
+          type="file"
+          accept=".jpeg,.jpg,.png"
           style={{ display: 'none' }}
           onChange={onFileChange}
         />
         {imageFile && (
-          <div className='editCoverPhotoContainer'>
+          <div className="editCoverPhotoContainer">
             <Cropper
               image={imageUrl}
               crop={crop}
@@ -147,7 +150,7 @@ function CoverPhoto({
               aspect={27 / 10}
               onCropChange={onCropChange}
               onCropComplete={onCropComplete}
-              objectFit='horizontal-cover'
+              objectFit="horizontal-cover"
               showGrid={false}
               classes={{
                 containerClassName: 'coverPhotoCropperContainer',
@@ -155,20 +158,20 @@ function CoverPhoto({
                 mediaClassName: 'coverPhotoMedia',
               }}
             />
-            <div className='editCoverPhotoBtnContainer'>
-              <div className='editCoverPhotoBtnText'>
+            <div className="editCoverPhotoBtnContainer">
+              <div className="editCoverPhotoBtnText">
                 <PublicIcon />
                 <span>Your cover photo is public.</span>
               </div>
-              <div className='editCoverPhotoBtnWrapper'>
+              <div className="editCoverPhotoBtnWrapper">
                 <div
-                  className='editCoverPhotoBtn editCoverPhotoBtnCancel'
+                  className="editCoverPhotoBtn editCoverPhotoBtnCancel"
                   onClick={handleCancelClick}
                 >
                   Cancel
                 </div>
                 <div
-                  className='editCoverPhotoBtn editCoverPhotoBtnSave'
+                  className="editCoverPhotoBtn editCoverPhotoBtnSave"
                   onClick={handleSaveClick}
                 >
                   Save Changes
@@ -180,12 +183,12 @@ function CoverPhoto({
       </div>
       {!(imageFile || user.coverPicture) && (
         <label
-          className='chooseCoverPhotoAlternative'
-          htmlFor='coverPhoto'
+          className="chooseCoverPhotoAlternative"
+          htmlFor="coverPhoto"
         ></label>
       )}
     </>
-  )
+  );
 }
 
-export default CoverPhoto
+export default CoverPhoto;

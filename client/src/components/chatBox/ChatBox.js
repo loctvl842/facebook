@@ -3,11 +3,35 @@ import Message from '../message/Message';
 
 import { useNavigate } from 'react-router-dom';
 import { SearchedUserContext } from '../../pages/messenger/Messenger';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
-const ChatBox = ({ chatInfoState, setChatInfoState }) => {
+import axios from 'axios';
+
+import ChatBoxInput from '../chatBoxInput/ChatBoxInput';
+
+const ChatBox = ({ chatInfoState, setChatInfoState, roomChatBox }) => {
+  console.log(roomChatBox);
   const navigate = useNavigate();
+  // friend to chat is searched user
   const searchedUser = useContext(SearchedUserContext);
+  const [messags, setMessages] = useState([]);
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+    const fetchMessages = async () => {
+      try {
+        // TODO get the room
+        // and then
+        // TODO get all the messages in the room
+        // const res = await axios.get(
+        //   `/api/messages?roomId=${roomChatBox?.roomChatBox._id}`,
+        // );
+        // console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchMessages();
+  }, [searchedUser]);
 
   return (
     <div className="chatBoxWrapper">
@@ -67,7 +91,9 @@ const ChatBox = ({ chatInfoState, setChatInfoState }) => {
             <Message />
             <Message />
           </div>
-          <div className="chatBoxInput"></div>
+          <div className="chatBoxInput">
+            <ChatBoxInput />
+          </div>
         </>
       )}
     </div>

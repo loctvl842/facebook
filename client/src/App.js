@@ -6,14 +6,14 @@ import Messenger from './pages/messenger/Messenger';
 import Friends from './pages/friends/Friends';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // Context
-import { Store } from './store/store';
+import { AuthStore } from './context/AuthContext/store';
 import { useContext } from 'react';
 import Topbar from './components/topbar/Topbar';
 
 function App() {
   const {
     auth: { user },
-  } = useContext(Store);
+  } = useContext(AuthStore);
   return (
     <Router>
       {user && <Topbar />}
@@ -22,6 +22,7 @@ function App() {
         <Route path="/profile/:username" element={<Profile />}></Route>
         <Route path="/login" element={user ? <Home /> : <Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/messenger/:userid" element={<Messenger />}></Route>
         <Route path="/messenger" element={<Messenger />}></Route>
         <Route path="/friends" element={<Friends />}></Route>
       </Routes>

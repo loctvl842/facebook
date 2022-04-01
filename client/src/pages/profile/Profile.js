@@ -17,15 +17,17 @@ import axios from 'axios';
 // icons
 import { CameraAltIcon } from '../../icon';
 // context
-import { Store } from '../../store/store';
+import { AuthStore } from '../../context/AuthContext/store';
 
 import { useClickOutside } from '../../customHook/useClickOutside';
 
 const Profile = () => {
-  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   const {
-    auth: { user: currentUser, isFetching },
-  } = useContext(Store);
+    auth: { user: currentUser },
+    isFetching,
+  } = useContext(AuthStore);
+
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   // can be you or another person's page
   const [user, setUser] = useState({});
   const [coverPhoto, setCoverPhoto] = useState('');

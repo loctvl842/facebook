@@ -7,7 +7,7 @@ import PostOptions from '../postOptions/PostOptions';
 import { newlineTextarea } from '../../utils/newlineTextarea';
 
 // context
-import { Store } from '../../store/store';
+import { AuthStore } from '../../context/AuthContext/store';
 
 import {
   MoreHorizOutlinedIcon,
@@ -20,6 +20,10 @@ import { useClickOutside } from '../../customHook/useClickOutside';
 import EditPost from '../editPost/EditPost';
 
 const Post = ({ post }) => {
+  const {
+    auth: { user: currentUser },
+  } = useContext(AuthStore);
+
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   const navigate = useNavigate(); // use for navigate to profile page
   const [like, setLike] = useState(post.likes.length); // to count the likes
@@ -41,10 +45,6 @@ const Post = ({ post }) => {
     setVisible: setEditPostVisible,
     ref: cardRef,
   } = useClickOutside(false);
-
-  const {
-    auth: { user: currentUser },
-  } = useContext(Store);
 
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser._id));

@@ -109,7 +109,8 @@
 
 .chatBoxMessage {
   overflow-y: scroll;
-  max-height: calc(100% - 71px - 60px);
+  /* minus height of topbar and bottombar of chatbox */
+  height: calc(100% - 71px - 60px);
 }
 
 .chatBoxAltContainer {
@@ -125,4 +126,8 @@
   font-size: 20px;
   font-weight: 700;
   color: rgba(100, 100, 100, 0.8);
+}
+
+.chatBoxInput {
+  height: 60px;
 }

@@ -1,41 +1,41 @@
-import './account.css'
+import './account.css';
 
-import { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { useClickOutside } from '../../customHook/useClickOutside'
+import { useClickOutside } from '../../customHook/useClickOutside';
 
 // context
-import { Store } from '../../store/store'
-import { LogOut } from '../../store/actions'
+import { AuthStore } from '../../context/AuthContext/store';
+import { LogOut } from '../../context/AuthContext/actions';
 
 // icon
-import { ArrowDropDownIcon, LogoutIcon } from '../../icon'
+import { ArrowDropDownIcon, LogoutIcon } from '../../icon';
 
 function Account() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     auth: { user },
     dispatch,
-  } = useContext(Store)
+  } = useContext(AuthStore);
 
-  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   // useState
   const {
     visible: dropdownVisible,
     ref: dropdownBtn,
     btnRef,
-  } = useClickOutside(false)
+  } = useClickOutside(false);
 
   const handleLogOut = () => {
-    localStorage.removeItem('user')
-    dispatch(LogOut())
-    navigate('/login')
-  }
+    localStorage.removeItem('user');
+    dispatch(LogOut());
+    navigate('/login');
+  };
   return (
-    <div className='accountContainer'>
-      <div className='accountBtnWrapper' ref={btnRef}>
+    <div className="accountContainer">
+      <div className="accountBtnWrapper" ref={btnRef}>
         <ArrowDropDownIcon
           sx={{
             fontSize: 32,
@@ -44,37 +44,37 @@ function Account() {
         />
       </div>
       {dropdownVisible && (
-        <div className='accountOptions' ref={dropdownBtn}>
+        <div className="accountOptions" ref={dropdownBtn}>
           <div
-            className='accountOption'
+            className="accountOption"
             onClick={() => {
-              navigate(`/profile/${user.username}`)
-              window.scrollTo(0, 0)
+              navigate(`/profile/${user.username}`);
+              window.scrollTo(0, 0);
             }}
           >
-            <div className='accountOptionLeft accountAvatar'>
+            <div className="accountOptionLeft accountAvatar">
               <img
                 src={user.profilePicture || PUBLIC_FOLDER + 'defaultAvt.jpg'}
-                alt='avatar'
-                className='topbarImg'
+                alt="avatar"
+                className="topbarImg"
               />
             </div>
-            <div className='accountOptionRight'>
+            <div className="accountOptionRight">
               <h4>{user.username}</h4>
               <span>See your profile</span>
             </div>
           </div>
-          <div className='accountHr'></div>
-          <div className='accountOption' onClick={handleLogOut}>
-            <div className='accountOptionLeft'>
+          <div className="accountHr"></div>
+          <div className="accountOption" onClick={handleLogOut}>
+            <div className="accountOptionLeft">
               <LogoutIcon sx={{ fontSize: '20px' }} />
             </div>
-            <span className='accountOptionRight'>Log out</span>
+            <span className="accountOptionRight">Log out</span>
           </div>
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default Account
+export default Account;

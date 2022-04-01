@@ -40,6 +40,7 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import SendIcon from '@mui/icons-material/Send';
 
 export {
   CircularProgress,
@@ -84,4 +85,5 @@ export {
   MoreVertIcon,
   CheckCircleOutlineIcon,
   RadioButtonUncheckedIcon,
+  SendIcon,
 };

@@ -3,41 +3,30 @@ import './chatMenu.css';
 import { SearchIcon, KeyboardBackspaceIcon } from '../../icon';
 
 // context
-import { Store } from '../../store/store';
+import { AuthStore } from '../../context/AuthContext/store';
 import { useContext, useState, useEffect, useRef, memo } from 'react';
-
-import axios from 'axios';
 
 // components
 import SearchChatUser from '../searchChatUser/SearchChatUser';
+import Room from '../room/Room';
 
 // hook
 import useSearchUsers from '../../customHook/useSearchUsers';
 
-const ChatMenu = ({ setSearchedUser }) => {
+import axios from 'axios';
+
+const ChatMenu = ({ setRoomChatBox }) => {
   const {
     auth: { user },
-  } = useContext(Store);
+  } = useContext(AuthStore);
 
   const [searchIconVisible, setSearchIconVisible] = useState(true);
 
   const { searchInput, setSearchInput, users } = useSearchUsers();
   const [searchVisible, setSearchVisible] = useState(false);
+  const [rooms, setRooms] = useState([]);
   const inputSearchRef = useRef();
   const searchTableRef = useRef();
-
-  useEffect(() => {
-    const getConversations = async () => {
-      try {
-        const res = await axios.get(`/conversation/${user._id}`);
-        console.log(res.data);
-        // TODO fetch conversation
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getConversations();
-  }, [user]);
 
   const handleSearchFriendChange = (e) => {
     setSearchInput(e.target.value);
@@ -57,7 +46,28 @@ const ChatMenu = ({ setSearchedUser }) => {
   };
 
   useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const res = await axios.get(`/rooms?userId=${user._id}`);
+        setRooms(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchRooms();
+  }, [user]);
+
+  useEffect(() => {
+    if (rooms.length != 0) {
+      const roomElements = document.querySelectorAll('.room');
+      roomElements.forEach((element) => element.classList.remove('roomActive'));
+      roomElements[0].classList.add('roomActive');
+    }
+  }, [rooms]);
+
+  useEffect(() => {
     document.addEventListener('click', handleClickOutside, true);
+
     return () => {
       document.removeEventListener('click', handleClickOutside, true);
     };
@@ -120,7 +130,6 @@ const ChatMenu = ({ setSearchedUser }) => {
                       <SearchChatUser
                         key={user._id}
                         chatUser={user}
-                        setSearchedUser={setSearchedUser}
                         setSearchVisible={setSearchVisible}
                         setSearchInput={setSearchInput}
                       />
@@ -132,7 +141,11 @@ const ChatMenu = ({ setSearchedUser }) => {
           </div>
         )}
       </div>
-      <div className="chatMenuBottom"></div>
+      <div className="chatMenuBottom">
+        {rooms.map((room) => (
+          <Room key={room._id} room={room} setRoomChatBox={setRoomChatBox} />
+        ))}
+      </div>
     </div>
   );
 };

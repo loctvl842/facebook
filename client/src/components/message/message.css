@@ -83,8 +83,10 @@
   background-color: #f3f3f3;
   padding: 8px 12px;
   border-radius: 18px;
-  width: calc(100% - 50px - 20px - 67px);
+  /* minus sendby icon, senderImg, optionsBox */
+  width: calc(100% - 67px);
   max-width: 564px;
+  box-sizing: border-box;
 }
 
 .messageOptions {

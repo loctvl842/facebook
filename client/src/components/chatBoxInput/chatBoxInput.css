@@ -1,0 +1,64 @@
+.chatBoxInputContainer {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.chatBoxInputBtn {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 35px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.chatBoxInputBtn:hover {
+  background-color: #f3f3f3;
+}
+
+.chatBoxInputBtn .moreAction {
+  width: 65%;
+  height: 65%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #1878f3;
+}
+
+.chatBoxInputWrapper {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  background: rgba(235, 235, 235, 0.6);
+  border-radius: 30px;
+  position: relative;
+  color: #050505;
+  width: calc(100% - 28px * 3 - 50px);
+  box-sizing: border-box;
+}
+
+.chatBoxInputText {
+  height: 20px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
+}
+
+.chatBoxInputBtnIcon {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}

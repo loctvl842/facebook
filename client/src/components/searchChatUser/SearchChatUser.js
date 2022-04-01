@@ -1,13 +1,10 @@
 import './searchChatUser.css';
+import { useNavigate } from 'react-router-dom';
 
-function SearchChatUser({
-  chatUser,
-  setSearchedUser,
-  setSearchVisible,
-  setSearchInput,
-}) {
+function SearchChatUser({ chatUser, setSearchVisible, setSearchInput }) {
+  const navigate = useNavigate();
   const handleSearchedUserClick = () => {
-    setSearchedUser(chatUser);
+    navigate(`/messenger/${chatUser._id}`);
     setSearchVisible(false);
     setSearchInput('');
   };
