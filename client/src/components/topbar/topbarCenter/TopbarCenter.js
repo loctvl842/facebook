@@ -5,20 +5,30 @@ import axios from 'axios';
 import { useContext, memo } from 'react';
 // context
 import { FeedStore } from '../../../context/FeedContext/store';
+import { AuthStore } from '../../../context/AuthContext/store';
+
+// actions of [PostStore]
 import { SetPosts, PostStart } from '../../../context/FeedContext/actions';
+// actions of [ChatStore]
+import { SetRooms } from '../../../context/ChatContext/actions';
 
 // icon
 import { HomeIcon, ChatIcon, PeopleIcon } from '../../../icon';
 
 function TopbarCenter({ pathname }) {
   const navigate = useNavigate();
-  const { dispatch } = useContext(FeedStore);
+  // dispatch of [FeedStore]
+  const { dispatch: feedDispatch } = useContext(FeedStore);
+  const {
+    auth: { user },
+    dispatch: chatDispatch,
+  } = useContext(AuthStore);
   const handleHomePageClick = async () => {
-    dispatch(PostStart());
+    feedDispatch(PostStart());
     window.scrollTo(0, 0);
     navigate('/');
     const res = await axios.get('/posts/random/6');
-    dispatch(
+    feedDispatch(
       SetPosts(
         res.data.sort((p1, p2) => {
           return new Date(p2.createdAt) - new Date(p1.createdAt);
@@ -27,9 +37,18 @@ function TopbarCenter({ pathname }) {
     );
   };
 
-  const handleMessengerPageClick = () => {
+  const handleMessengerPageClick = async () => {
     window.scrollTo(0, 0);
-    navigate('/messenger');
+    try {
+      const res = await axios.get(`/rooms?userId=${user._id}`);
+      chatDispatch(SetRooms(res.data));
+      const firstRoom = res.data[0];
+      const firstRoomUrl =
+        firstRoom.members.length > 1 ? firstRoom._id : firstRoom.members[0]._id;
+      navigate(`/messenger/${firstRoomUrl}`);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleFriendsPageClick = () => {

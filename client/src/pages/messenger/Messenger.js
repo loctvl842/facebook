@@ -2,60 +2,52 @@ import './messenger.css';
 import ChatMenu from '../../components/chatMenu/ChatMenu';
 import ChatBox from '../../components/chatBox/ChatBox';
 import ChatInfo from '../../components/chatInfo/ChatInfo';
-import { useEffect, useState, createContext } from 'react';
-import { useParams } from 'react-router-dom';
-
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
-export const SearchedUserContext = createContext();
+// context
+import { AuthStore } from '../../context/AuthContext/store';
+import { ChatStore } from '../../context/ChatContext/store';
+
+// actions of [ChatStore]
+import { SetRooms } from '../../context/ChatContext/actions';
 
 function Messenger() {
+  const {
+    auth: { user },
+  } = useContext(AuthStore);
+  const { dispatch: chatDispatch } = useContext(ChatStore);
+  // mounting/unmounting chatInfo
   const [chatInfoState, setChatInfoState] = useState(false);
-  const [searchedUser, setSearchedUser] = useState(null);
-  // state of the current room we are chatting
-  const [roomChatBox, setRoomChatBox] = useState(null);
-  const userId = useParams().userid;
   useEffect(() => {
-    if (userId) {
-      const fetchUser = async () => {
-        try {
-          const res = await axios.get(`/users?userId=${userId}`);
-          setSearchedUser(res.data);
-        } catch (err) {
-          console.log(err);
-        }
-      };
-      fetchUser();
-    } else {
-      setSearchedUser(null);
-    }
-  }, [userId]);
-  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const res = await axios.get(`/rooms?userId=${user._id}`);
+        chatDispatch(SetRooms(res.data));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchRooms();
     document.title = 'Messenger | Facebook';
   }, []);
-  useEffect(() => {
-    console.log(roomChatBox);
-  }, [roomChatBox]);
   return (
-    <SearchedUserContext.Provider value={searchedUser}>
-      <div className="messenger">
-        <div className="chatMenu">
-          <ChatMenu setRoomChatBox={setRoomChatBox} />
-        </div>
-        <div className="chatBox">
-          <ChatBox
-            chatInfoState={chatInfoState}
-            setChatInfoState={setChatInfoState}
-            roomChatBox={roomChatBox}
-          />
-        </div>
-        {chatInfoState && (
-          <div className="chatInfo">
-            <ChatInfo />
-          </div>
-        )}
+    <div className="messenger">
+      <div className="chatMenu">
+        <ChatMenu />
       </div>
-    </SearchedUserContext.Provider>
+      <div className="chatBox">
+        <ChatBox
+          chatInfoState={chatInfoState}
+          setChatInfoState={setChatInfoState}
+        />
+      </div>
+      {chatInfoState && (
+        <div className="chatInfo">
+          <ChatInfo />
+        </div>
+      )}
+    </div>
   );
 }
 

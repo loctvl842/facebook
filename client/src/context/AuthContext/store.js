@@ -13,7 +13,7 @@ const AuthStoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(rootReducer, INIT_STATE);
   useEffect(() => {
     localStorage.setItem('user', JSON.stringify(state.user));
-  }, [state]);
+  }, [state.user]);
   const value = {
     auth: state,
     dispatch,

@@ -1,6 +1,6 @@
 import './account.css';
 
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useClickOutside } from '../../customHook/useClickOutside';
@@ -18,7 +18,6 @@ function Account() {
     auth: { user },
     dispatch,
   } = useContext(AuthStore);
-
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   // useState

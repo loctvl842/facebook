@@ -1,0 +1,89 @@
+.chatMenuSearch {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 15px;
+  z-index: 100;
+}
+
+.chatMenuBackIcon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-left: 5px;
+  cursor: pointer;
+  min-width: 38px;
+}
+
+.chatMenuBackIcon:hover {
+  background-color: rgba(235, 235, 235, 0.5);
+}
+
+.chatMenuSearchIcon {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.chatMenuSearchContainer {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  background-color: rgba(235, 235, 235, 0.6);
+  border-radius: 80px;
+  margin: 0 20px 0 5px;
+  position: relative;
+  width: 80%;
+  transition: all 0.5s ease;
+  color: #050505;
+}
+
+.chatMenuSearchedFriend {
+  width: 100%;
+  height: 410px;
+  position: absolute;
+  top: 45px;
+  left: 0;
+  padding: 0px 10px;
+  box-sizing: border-box;
+}
+
+.chatMenuSearchedFriendWrapper {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  margin-top: 10px;
+}
+
+.chatMenuSearchFor {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0px 0px 10px;
+  box-sizing: border-box;
+}
+
+.chatMenuSearchForText {
+  white-space: nowrap;
+  margin-left: 5px;
+  font-size: 14px;
+  width: calc(100% - 40px);
+  overflow-x: hidden;
+}
+
+.chatMenuSearchInput {
+  height: 23px;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  margin-left: 5px;
+  box-sizing: border-box;
+  width: calc(100% - 30px);
+}

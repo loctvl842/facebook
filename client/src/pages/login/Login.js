@@ -10,6 +10,8 @@ import {
 
 // Context
 import { AuthStore } from '../../context/AuthContext/store';
+
+// actions of [AuthStore]
 import {
   LoginStart,
   LoginSuccess,
@@ -18,7 +20,7 @@ import {
 import axios from 'axios';
 
 const Login = () => {
-  const { auth, dispatch } = useContext(AuthStore);
+  const { auth, dispatch: authDispatch } = useContext(AuthStore);
 
   let navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -33,13 +35,13 @@ const Login = () => {
       email: email,
       password: password,
     };
-    dispatch(LoginStart());
+    authDispatch(LoginStart());
     try {
-      const res = await axios.post('/auth/login', userCrediential);
-      dispatch(LoginSuccess(res.data));
+      const loginRes = await axios.post('/auth/login', userCrediential);
+      authDispatch(LoginSuccess(loginRes.data));
     } catch (err) {
       console.log(err.response);
-      dispatch(LoginFailure(err.response.data.content));
+      authDispatch(LoginFailure(err.response.data.content));
       if (err.response.data.type === 'email') {
         emailRef.current.classList.add('loginInputError');
       } else if (err.response.data.type === 'password') {

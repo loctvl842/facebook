@@ -1,41 +1,56 @@
 import './chatBox.css';
 import Message from '../message/Message';
 
-import { useNavigate } from 'react-router-dom';
-import { SearchedUserContext } from '../../pages/messenger/Messenger';
-import { useContext, useEffect, useState } from 'react';
-
-import axios from 'axios';
-
 import ChatBoxInput from '../chatBoxInput/ChatBoxInput';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 
-const ChatBox = ({ chatInfoState, setChatInfoState, roomChatBox }) => {
-  console.log(roomChatBox);
+// context
+import { ChatStore } from '../../context/ChatContext/store';
+
+const OneFriendChatBoxImg = ({ imgUrl, friendName }) => {
   const navigate = useNavigate();
-  // friend to chat is searched user
-  const searchedUser = useContext(SearchedUserContext);
-  const [messags, setMessages] = useState([]);
-  useEffect(() => {
-    const source = axios.CancelToken.source();
-    const fetchMessages = async () => {
-      try {
-        // TODO get the room
-        // and then
-        // TODO get all the messages in the room
-        // const res = await axios.get(
-        //   `/api/messages?roomId=${roomChatBox?.roomChatBox._id}`,
-        // );
-        // console.log(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchMessages();
-  }, [searchedUser]);
+  return (
+    <div
+      className="oneFriendChatBoxImgContainer"
+      onClick={() => {
+        navigate(`/profile/${friendName}`);
+        window.scrollTo(0, 0);
+      }}
+    >
+      <img className="oneFriendChatBoxImg" src={imgUrl} alt="" />
+    </div>
+  );
+};
 
+const GroupChatBoxImg = ({ imgUrl1, imgUrl2 }) => {
+  return (
+    <div className="groupChatBoxImgContainer">
+      <div className="groupChatBoxImgTopRight">
+        <img className="groupChatBoxImg" src={imgUrl1} alt="" />
+      </div>
+      <div className="groupChatBoxImgBottomLeft">
+        <img className="groupChatBoxImg" src={imgUrl2} alt="" />
+      </div>
+    </div>
+  );
+};
+
+const ChatBox = ({ chatInfoState, setChatInfoState }) => {
+  const navigate = useNavigate();
+  const {
+    chat: { roomActive },
+  } = useContext(ChatStore);
+  const handleChatBoxNameClick = () => {
+    // one friend
+    if (roomActive.members.length === 1) {
+      navigate(`/profile/${roomActive.name}`);
+      window.scrollTo(0, 0);
+    }
+  };
   return (
     <div className="chatBoxWrapper">
-      {!searchedUser ? (
+      {!roomActive ? (
         <div className="chatBoxAltContainer">
           <div className="chatBoxAlt">
             Select a chat or start a new conversation
@@ -47,26 +62,34 @@ const ChatBox = ({ chatInfoState, setChatInfoState, roomChatBox }) => {
             <div className="chatBoxTopLeft">
               <div
                 className="chatBoxImgContainer"
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                  navigate(`/profile/${searchedUser.username}`);
-                }}
+                style={{ background: 'none' }}
               >
-                <img
-                  src={searchedUser.profilePicture}
-                  alt="loc"
-                  className="chatBoxImg"
-                />
+                {roomActive.members.length > 1 ? (
+                  <GroupChatBoxImg
+                    imgUrl1={roomActive.img[1]}
+                    imgUrl2={roomActive.img[0]}
+                  />
+                ) : (
+                  <OneFriendChatBoxImg
+                    imgUrl={roomActive.img[0]}
+                    friendName={roomActive.name}
+                  />
+                )}
               </div>
               <div className="chatBoxText">
                 <span
                   className="chatBoxName"
-                  onClick={() => {
-                    window.scrollTo(0, 0);
-                    navigate(`/profile/${searchedUser.username}`);
+                  onClick={handleChatBoxNameClick}
+                  style={{
+                    textDecoration: `${
+                      roomActive.members.length === 1 ? '' : 'none'
+                    }`,
+                    cursor: `${
+                      roomActive.members.length === 1 ? 'pointer' : 'text'
+                    }`,
                   }}
                 >
-                  {searchedUser.username}
+                  {roomActive.name}
                 </span>
                 <span className="chatBoxState">Active now</span>
               </div>

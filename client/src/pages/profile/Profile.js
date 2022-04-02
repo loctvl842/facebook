@@ -26,6 +26,10 @@ const Profile = () => {
     auth: { user: currentUser },
     isFetching,
   } = useContext(AuthStore);
+  useEffect(() => {
+    currentUser.alo = 'loc';
+    console.log('Profile ', currentUser);
+  }, []);
 
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   // can be you or another person's page
