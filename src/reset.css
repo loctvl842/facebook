@@ -10,7 +10,6 @@ body {
   color: #1c1e21;
   margin: 0;
   padding: 0;
-  background: var(--web-wash);
   text-rendering: optimizeSpeed;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
