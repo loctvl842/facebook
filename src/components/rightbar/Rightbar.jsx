@@ -32,10 +32,7 @@ const Rightbar = ({ user }) => {
             <div className="rightbarInfoItem">
               <School className="rightbarInfoIcon" />
               <span className="rightbarInfoKey">
-                Went to{" "}
-                <span className="rightbarInfoValue">
-                  Trường THPT Chuyên Hùng Vương - Gia Lai
-                </span>
+                Went to <span className="rightbarInfoValue">Trường THPT Chuyên Hùng Vương - Gia Lai</span>
               </span>
             </div>
             <div className="rightbarInfoItem">
@@ -56,11 +53,7 @@ const Rightbar = ({ user }) => {
           <h4 className="rightbarTitle">Friends</h4>
           <div className="rightbarFollowingContainer">
             <div className="rightbarFollowing">
-              <img
-                src="http://localhost:3000/assets/van.jpg"
-                alt=""
-                className="rightbarFollowingImg"
-              />
+              <img src="http://localhost:3000/assets/van.jpg" alt="" className="rightbarFollowingImg" />
               <span className="rightbarFollowingName">Vân Nguyễn</span>
             </div>
           </div>
@@ -70,9 +63,7 @@ const Rightbar = ({ user }) => {
   };
   return (
     <div className="rightbar">
-      <div className="rightbarWrapper">
-        {user ? <ProfileRightBar /> : <HomeRightBar />}
-      </div>
+      <div className="rightbarWrapper">{user ? <ProfileRightBar /> : <HomeRightBar />}</div>
     </div>
   );
 };
