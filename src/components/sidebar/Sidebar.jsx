@@ -1,9 +1,5 @@
 import "./sidebar.css";
 
-// context
-import { AuthStore } from "../../context/AuthContext/store";
-import { useContext } from "react";
-
 import { useNavigate } from "react-router-dom";
 import {
   People,

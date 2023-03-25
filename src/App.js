@@ -5,17 +5,18 @@ import { Login, Home, Profile } from "~/pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Topbar from "./components/topbar/Topbar";
+import { useSelector } from "react-redux";
 
 function App() {
-  const user = localStorage.getItem("user");
+  const { loggedIn } = useSelector((state) => state.auth);
 
   return (
     <BrowserRouter>
-      {user && <Topbar />}
+      {loggedIn && <Topbar />}
       <Routes>
-        <Route path="/" element={user ? <Home /> : <Login />}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/profile/:username" element={<Profile />}></Route>
-        <Route path="/login" element={user ? <Home /> : <Login />}></Route>
+        <Route path="/login" element={<Login />}></Route>
         {/* <Route path="/register" element={<Register />}></Route> */}
         {/* <Route path="/friends" element={<Friends />}></Route> */}
       </Routes>

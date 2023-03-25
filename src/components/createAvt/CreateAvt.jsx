@@ -38,7 +38,7 @@ function CreateAvt({ createAvtVisibe, setCreateAvtVisible, createAvtRef }) {
       reader.current = new FileReader();
 
       reader.current.onload = () => {
-        if (reader.current.readyState == 2) {
+        if (reader.current.readyState === 2) {
           setImage(reader.current.result);
         }
       };
@@ -142,7 +142,7 @@ function CreateAvt({ createAvtVisibe, setCreateAvtVisible, createAvtRef }) {
         console.log(err);
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 

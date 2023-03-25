@@ -17,6 +17,7 @@ const Feed = ({ username }) => {
   const { posts } = useSelector((state) => state.post);
 
   useEffect(() => {
+    console.log('loc')
     const source = axios.CancelToken.source();
     const getPosts = async () => {
       try {
@@ -45,7 +46,7 @@ const Feed = ({ username }) => {
     return () => {
       source.cancel();
     };
-  }, [username]);
+  }, [username, dispatch]);
 
   return (
     <div className="feed">

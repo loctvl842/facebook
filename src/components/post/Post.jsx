@@ -13,7 +13,7 @@ import PostOptions from "../postOptions/PostOptions";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import * as timeago from "timeago.js";
+// import { format } from "timeago.js";
 import { useNavigate } from "react-router-dom";
 import { newlineTextarea } from "~/utils/newlineTextarea";
 
@@ -24,7 +24,6 @@ const Post = ({ post }) => {
   const navigate = useNavigate(); // use for navigate to profile page
   const [like, setLike] = useState(post.likes.length); // to count the likes
   // TODO: make comment function
-  const [comment, setComment] = useState(post.comment);
   const [isLiked, setIsLiked] = useState(false); // to check if currentUser liked it or not
   const [creator, setCreator] = useState({}); // user who creates the post
 
@@ -77,6 +76,8 @@ const Post = ({ post }) => {
     setIsLiked((preIsLiked) => !preIsLiked);
   };
 
+  // ISO: 2022-03-15T10:26:33.033Z
+  // Unix: 1647398793
   // we only post when the post have enought infomation
   // (meaning the post has the name of the person posting it for example)
   return (
@@ -92,7 +93,11 @@ const Post = ({ post }) => {
                   navigate(`/profile/${creator.username}`);
                 }}
               >
-                <img src={creator.profilePicture || PUBLIC_FOLDER + "defaultAvt.jpg"} className="postProfileImg" />
+                <img
+                  src={creator.profilePicture || PUBLIC_FOLDER + "defaultAvt.jpg"}
+                  alt="Profile"
+                  className="postProfileImg"
+                />
               </div>
               <div className="postNameDate">
                 <span
@@ -104,7 +109,7 @@ const Post = ({ post }) => {
                 >
                   {creator.username}
                 </span>
-                <span className="postDate">{timeago.format(post.createdAt)}</span>
+                {/* <span className="postDate">{format(post.createdAt, "en_US")}</span> */}
               </div>
             </div>
             <div className="postTopRight">
@@ -132,7 +137,7 @@ const Post = ({ post }) => {
             <div className="postText">{newlineTextarea(post.desc)}</div>
             {post.img && (
               <div className="postImgWrapper">
-                <img className="postImg postImgAvt" src={post.img} alt="" />
+                <img className="postImg postImgAvt" src={post.img} alt="post" />
               </div>
             )}
           </div>
@@ -141,9 +146,6 @@ const Post = ({ post }) => {
               <ThumbUp className="likeIcon" style={{ color: "#246dff" }} onClick={handleLikeIcon} />
               <FavoriteOutlined className="likeIcon" style={{ color: "red" }} />
               {like !== 0 && <span className="postLikeCounter">{like} people like</span>}
-            </div>
-            <div className="postBottomRight">
-              <span className="postCommentText">{comment} comments</span>
             </div>
           </div>
         </div>

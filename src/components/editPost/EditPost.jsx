@@ -33,7 +33,7 @@ const EditPost = ({ editPostVisible, setEditPostVisible, cardRef, post }) => {
       reader.current = new FileReader();
 
       reader.current.onload = () => {
-        if (reader.current.readyState == 2) {
+        if (reader.current.readyState === 2) {
           setImg(reader.current.result);
         }
       };
@@ -83,7 +83,7 @@ const EditPost = ({ editPostVisible, setEditPostVisible, cardRef, post }) => {
   useEffect(() => {
     setDesc(post.desc);
     setImg(post.img);
-    setChooseImg(post.img != "");
+    setChooseImg(post.img !== "");
 
     if (editPostVisible) {
       // fix the height right after opening create-post
@@ -93,8 +93,8 @@ const EditPost = ({ editPostVisible, setEditPostVisible, cardRef, post }) => {
       }
       // fix the active state of post button right after opening create-post
       if (postBtn.current) {
-        if (desc != post.desc || img != post.img) {
-          if (desc != "" || chooseImg) {
+        if (desc !== post.desc || img !== post.img) {
+          if (desc !== "" || chooseImg) {
             postBtn.current.classList.add("cardButtonActive");
           } else {
             postBtn.current.classList.remove("cardButtonActive");
@@ -107,13 +107,13 @@ const EditPost = ({ editPostVisible, setEditPostVisible, cardRef, post }) => {
     } else {
       document.querySelector("html").style.position = "relative";
     }
-  }, [editPostVisible]);
+  }, [editPostVisible, img, chooseImg, desc, post]);
 
   useEffect(() => {
     // enable post button if having new desc or new chooseImg
-    if (postBtn.current != undefined) {
-      if (desc != post.desc || img != post.img) {
-        if (desc != "" || chooseImg) {
+    if (postBtn.current !== undefined) {
+      if (desc !== post.desc || img !== post.img) {
+        if (desc !== "" || chooseImg) {
           postBtn.current.classList.add("cardButtonActive");
         } else {
           postBtn.current.classList.remove("cardButtonActive");
@@ -122,7 +122,7 @@ const EditPost = ({ editPostVisible, setEditPostVisible, cardRef, post }) => {
         postBtn.current.classList.remove("cardButtonActive");
       }
     }
-  }, [desc, img, chooseImg]);
+  }, [desc, img, chooseImg, post]);
 
   return (
     <>
@@ -148,7 +148,7 @@ const EditPost = ({ editPostVisible, setEditPostVisible, cardRef, post }) => {
             </div>
             <div className="cardInfo">
               <div className="cardInfoLeft">
-                <img src={user.profilePicture || PUBLIC_FOLDER + "defaultAvt.jpg"} className="cardProfilePicture" />
+                <img src={user.profilePicture || PUBLIC_FOLDER + "defaultAvt.jpg"} className="cardProfilePicture"  alt="cardinfo"/>
               </div>
               <div className="cardInfoRight">
                 <span className="cardUsername">{user.username}</span>

@@ -7,7 +7,7 @@ import { Close, PermMediaRounded, TagFacesOutlined, AddAPhoto } from "@mui/icons
 // acitons
 import { postAdd, postFail, postStart, postSuccess } from "~/store/postSlice";
 
-import { useState, useContext, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -36,7 +36,7 @@ function CreatePost({ visible, setVisible, cardRef }) {
       reader.current = new FileReader();
 
       reader.current.onload = () => {
-        if (reader.current.readyState == 2) {
+        if (reader.current.readyState === 2) {
           setImg(reader.current.result);
         }
       };
@@ -104,11 +104,11 @@ function CreatePost({ visible, setVisible, cardRef }) {
     } else {
       document.querySelector("html").style.position = "relative";
     }
-  }, [visible]);
+  }, [visible, chooseImg, desc]);
 
   useEffect(() => {
     // enable post button if having desc or chooseImg
-    if (postBtn.current != undefined) {
+    if (postBtn.current !== undefined) {
       if (desc || chooseImg) {
         postBtn.current.classList.add("cardButtonActive");
       } else {
@@ -141,7 +141,11 @@ function CreatePost({ visible, setVisible, cardRef }) {
             </div>
             <div className="cardInfo">
               <div className="cardInfoLeft">
-                <img src={user.profilePicture || PUBLIC_FOLDER + "defaultAvt.jpg"} className="cardProfilePicture" />
+                <img
+                  src={user.profilePicture || PUBLIC_FOLDER + "defaultAvt.jpg"}
+                  className="cardProfilePicture"
+                  alt=""
+                />
               </div>
               <div className="cardInfoRight">
                 <span className="cardUsername">{user.username}</span>

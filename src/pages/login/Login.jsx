@@ -41,7 +41,7 @@ const Login = () => {
       const res = await axios.post("/auth/login", creds);
       dispatch(authSuccess(res.data));
       dispatch(userSet(res.data));
-      navigate('/')
+      navigate("/");
     } catch (e) {
       dispatch(authFail(e.response.data.content));
       if (e.response.data.type === "email") {
@@ -57,7 +57,12 @@ const Login = () => {
   }, [showPassword]);
 
   useEffect(() => {
-    navigate("/login");
+    const user = localStorage.getItem("user");
+    if (user !== null) {
+      navigate("/");
+      document.title = "Facebook";
+      return;
+    }
     document.title = "Facebook - Login";
   }, [navigate]);
 
@@ -99,9 +104,9 @@ const Login = () => {
                 onChange={handleFormControlChange}
                 onFocus={(e) => e.target.classList.remove("loginInputError")}
                 required
-                // minLength={8}
+              // minLength={8}
               />
-              {creds.passowrd != "" && (
+              {creds.password !== "" && (
                 <div
                   className="loginInputEyeWrapper"
                   onClick={() => {

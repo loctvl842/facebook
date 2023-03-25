@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import "./postOptions.css";
-import axios from "axios";
 
 // icons
 import { CreateOutlined, DeleteOutlineOutlined, CancelPresentation, PersonRemove } from "@mui/icons-material";
@@ -9,6 +7,7 @@ import { CreateOutlined, DeleteOutlineOutlined, CancelPresentation, PersonRemove
 import { postRemove, postStart, postSuccess } from "~/store/postSlice";
 
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 function PostOptions({ postOptionRef, setPostOptionVisible, setEditPostVisible, post, user }) {
   const dispatch = useDispatch();
@@ -27,13 +26,13 @@ function PostOptions({ postOptionRef, setPostOptionVisible, setEditPostVisible, 
     dispatch(postStart());
     try {
       setPostOptionVisible(false);
-      const res = await axios.delete(`/posts/${post._id}/`, {
+      await axios.delete(`/posts/${post._id}/`, {
         data: {
           userId: currentUser._id,
         },
       });
       dispatch(postRemove(post._id));
-      dispatch(postSuccess())
+      dispatch(postSuccess());
     } catch (err) {
       console.log(err);
     }

@@ -17,7 +17,7 @@ import CoverPhotoOptions from "../coverPhotoOptions/CoverPhotoOptions";
 import { useDispatch, useSelector } from "react-redux";
 
 function CoverPhoto({ coverPhoto: imageUrl, setCoverPhoto: setImageUrl, editableInfo }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const user = useSelector((state) => state.auth);
 
@@ -48,7 +48,7 @@ function CoverPhoto({ coverPhoto: imageUrl, setCoverPhoto: setImageUrl, editable
     if (fileInput) {
       fileReader.current = new FileReader();
       fileReader.current.onload = () => {
-        if (fileReader.current.readyState == 2) {
+        if (fileReader.current.readyState === 2) {
           setImageUrl(fileReader.current.result);
         }
       };

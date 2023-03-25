@@ -9,18 +9,16 @@ import Loading from "../../components/loading/Loading";
 import CoverPhoto from "../../components/coverPhoto/CoverPhoto";
 
 // hook
-import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useClickOutside } from "../../customHook/useClickOutside";
 
-import axios from "axios";
 
 // icons
 import { CameraAlt } from "@mui/icons-material";
-// context
-import { AuthStore } from "../../context/AuthContext/store";
 
-import { useClickOutside } from "../../customHook/useClickOutside";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const Profile = () => {
   const { isFetching } = useSelector((state) => state.auth);
@@ -46,7 +44,6 @@ const Profile = () => {
     const fetchUser = async () => {
       try {
         const res = await axios.get(`/users?username=${username}`);
-        console.log(res.data);
         setAccount(res.data);
         // we can edit info of currentUser
         setEditableInfo(user._id === res.data._id);
@@ -56,10 +53,8 @@ const Profile = () => {
       }
     };
     fetchUser();
-  }, [username]);
-  useEffect(() => {
-    setAccount(user);
-  }, [user]);
+  }, [username, user]);
+
   return (
     <div className="profileContainer">
       <CreateAvt

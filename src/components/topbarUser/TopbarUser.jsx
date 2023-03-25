@@ -1,4 +1,4 @@
-import "./account.css";
+import "./topbarUser.css";
 
 // hook
 import { useClickOutside } from "~/customHook/useClickOutside";
@@ -8,13 +8,13 @@ import { authReset } from "~/store/authSlice";
 
 // icon
 import { ArrowDropDown, Logout } from "@mui/icons-material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-function Account() {
+function TopbarUser() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem("user")) | null;
+  const user = useSelector((state) => state.user);
 
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -66,4 +66,4 @@ function Account() {
   );
 }
 
-export default Account;
+export default TopbarUser;

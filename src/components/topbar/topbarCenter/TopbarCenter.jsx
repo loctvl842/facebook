@@ -1,48 +1,17 @@
 import "./topbarCenter.css";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
-import { useContext } from "react";
-// context
-import { FeedStore } from "../../../context/FeedContext/store";
-
-// actions of [PostStore]
-import { SetPosts, PostStart } from "../../../context/FeedContext/actions";
-
 // icons
 import { Home, Chat, People } from "@mui/icons-material";
 
+import { useNavigate } from "react-router-dom";
+
 function TopbarCenter({ pathname }) {
   const navigate = useNavigate();
-  // dispatch of [FeedStore]
-  const { dispatch: feedDispatch } = useContext(FeedStore);
   const handleHomePageClick = async () => {
-    feedDispatch(PostStart());
     window.scrollTo(0, 0);
     navigate("/");
-    const res = await axios.get("/posts/random/6");
-    feedDispatch(
-      SetPosts(
-        res.data.sort((p1, p2) => {
-          return new Date(p2.createdAt) - new Date(p1.createdAt);
-        })
-      )
-    );
   };
 
   const handleMessengerPageClick = async () => {
-    // window.scrollTo(0, 0);
-    // try {
-    //   const res = await axios.get(`/rooms?userId=${user._id}`);
-    //   chatDispatch(SetRooms(res.data));
-    //   chatDispatch(SetRoomActive(res.data[0]));
-    //   const firstRoom = res.data[0];
-    //   const firstRoomUrl =
-    //     firstRoom.members.length > 1 ? firstRoom._id : firstRoom.members[0]._id;
-    //   navigate(`/messenger/${firstRoomUrl}`);
-    // } catch (err) {
-    //   console.log(err);
-    // }
     navigate("/messenger");
   };
 

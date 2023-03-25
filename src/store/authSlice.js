@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const user = localStorage.getItem('user')
+
 const initialState = {
-  loggedIn: false,
+  loggedIn: user !== null,
   isFetching: false,
   error: false,
 };
@@ -17,8 +19,7 @@ const authSlice = createSlice({
         error: false,
       };
     },
-    authSuccess(_, action) {
-      const data = action.payload;
+    authSuccess() {
       return {
         loggedIn: true,
         isFetching: false,
