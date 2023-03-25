@@ -6,17 +6,36 @@
 .chatBoxTop {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   border-bottom: 1px solid rgba(200, 200, 200, 0.9);
   user-select: none;
+  justify-content: space-between;
 }
 
 .chatBoxTopLeft {
   display: flex;
   align-items: center;
-  padding: 15px 20px;
+  padding: 15px 0px;
   height: 100%;
+  max-width: 70px;
+  min-width: 70px;
+  justify-content: center;
+  flex: 1;
+}
+
+.chatBoxTopCenter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  min-width: 180px;
+  flex: 1;
+}
+
+.chatBoxTopRight {
+  height: 100%;
+  flex: 1;
+  max-width: 70px;
 }
 
 .chatBoxImgContainer {
@@ -92,7 +111,6 @@
 .chatBoxText {
   display: flex;
   flex-direction: column;
-  margin-left: 8px;
 }
 
 .chatBoxNameWrapper {
@@ -104,6 +122,7 @@
   box-sizing: border-box;
   cursor: pointer;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .chatBoxName:hover {
@@ -114,14 +133,12 @@
   font-size: 14px;
 }
 
-.chatBoxTopRight {
-  height: 100%;
-}
-
 .chatBoxOptions {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: auto 0;
+  justify-content: center;
+  height: 100%;
 }
 
 .chatBoxOption {

@@ -1,5 +1,7 @@
 const INIT_STATE = {
   rooms: [],
+  roomActive: null,
+  roomActiveElement: null,
   isFetching: false,
   error: false,
 };
@@ -16,7 +18,6 @@ const rootReducer = (state = INIT_STATE, action) => {
       return {
         ...state,
         rooms: [...action.payload],
-        roomActive: action.payload[0],
         isFetching: false,
         error: false,
       };
@@ -37,7 +38,14 @@ const rootReducer = (state = INIT_STATE, action) => {
     case 'chat/SET_ROOM_ACTIVE':
       return {
         ...state,
-        roomActive: action.payload,
+        roomActive: action.payload.room,
+        roomActiveElement: action.payload.roomElement,
+      };
+    case 'chat/CHAT_LOGOUT':
+      return {
+        ...state,
+        rooms: [],
+        roomActive: null,
       };
     default:
       return state;

@@ -7,7 +7,7 @@
   box-sizing: border-box;
   border-radius: 10px;
   padding: 8px;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s linear;
   user-select: none;
 }
 

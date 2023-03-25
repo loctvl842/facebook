@@ -22,10 +22,18 @@ export const MoveToFront = (roomId) => {
   };
 };
 
-export const SetRoomActive = (room) => {
+export const SetRoomActive = ({ room, roomElement }) => {
   console.log('SET_ROOM_ACTIVE');
   return {
     type: 'chat/SET_ROOM_ACTIVE',
-    payload: room,
+    payload: { room, roomElement },
+  };
+};
+
+export const ChatLogout = () => {
+  console.log('CHAT_LOGOUT');
+  return {
+    type: 'chat/CHAT_LOGOUT',
+    payload: null,
   };
 };

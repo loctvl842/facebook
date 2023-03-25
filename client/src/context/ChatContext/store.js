@@ -4,6 +4,7 @@ import rootReducer from './reducer';
 const INIT_STATE = {
   rooms: [],
   roomActive: null,
+  roomActiveElement: null,
   isFetching: false,
   error: false,
 };
